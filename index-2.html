@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The League — Official Rules</title>
+<style>
+:root{--bg:#fff;--card:#fff;--ink:#1b1b1b;--mute:#6b6b6b;--accent:#c8102e;--gold:#c8102e;--line:#ecd9db;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#161212;--card:#201919;--ink:#f5eeee;--mute:#b3a3a3;--accent:#ff5a6e;--gold:#ff5a6e;--line:#3a2a2c}}
+:root[data-theme="dark"]{--bg:#161212;--card:#201919;--ink:#f5eeee;--mute:#b3a3a3;--accent:#ff5a6e;--gold:#ff5a6e;--line:#3a2a2c}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Georgia,'Times New Roman',serif;line-height:1.55}
+header{padding:24px 16px 14px;text-align:center;background:#c8102e;border-bottom:4px solid #8f0b21}
+h1{margin:0;font-size:1.8rem;letter-spacing:.04em;text-transform:uppercase;color:#fff}
+.sub{color:#fff;opacity:.9;margin-top:6px;font-family:system-ui,sans-serif;font-size:.75rem}
+main{max-width:720px;margin:0 auto;padding:14px 12px 32px}
+h2{font-family:system-ui,sans-serif;font-size:1rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin:4px 0 10px}
+.rule{display:flex;gap:10px;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:9px 12px;margin-bottom:7px}
+.num{flex:none;width:24px;height:24px;font-size:.8rem;border-radius:50%;background:var(--accent);color:var(--bg);display:flex;align-items:center;justify-content:center;font-family:system-ui,sans-serif;font-weight:700}
+.rule h3{margin:0 0 2px;font-size:.95rem}
+.rule p{margin:0;font-size:.88rem;line-height:1.4}
+.date{font-family:system-ui,sans-serif;font-size:.68rem;color:var(--mute);margin-top:3px}
+h2 small{font-weight:400;letter-spacing:0;text-transform:none;margin-left:6px}
+.tb{background:var(--accent);color:var(--bg);font-family:system-ui,sans-serif;font-size:.85rem;border-radius:8px;padding:8px 12px;margin-bottom:14px}
+section{margin-bottom:10px}
+.pill{font-family:system-ui,sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;border:1px solid var(--accent);color:var(--accent);border-radius:99px;padding:1px 7px;margin-left:8px;vertical-align:middle}
+.pill.cbs{background:var(--accent);color:var(--bg)}
+details{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;margin-bottom:7px}
+summary{cursor:pointer;padding:9px 12px;font-family:system-ui,sans-serif;font-weight:600;font-size:.92rem}
+.srow{display:flex;justify-content:space-between;gap:12px;padding:6px 12px;border-top:1px solid var(--line);font-size:.85rem;line-height:1.35}
+.srow span:first-child{flex:0 0 42%}
+.srow span:last-child{text-align:right;color:var(--mute)}
+[hidden]{display:none!important}
+.tabs{display:flex;gap:6px;max-width:720px;margin:0 auto;padding:12px 12px 0}
+.tabs button{flex:1;font-family:system-ui,sans-serif;font-size:.88rem;font-weight:600;padding:10px 8px;border:1px solid var(--accent);background:var(--card);color:var(--accent);border-radius:8px;cursor:pointer}
+.tabs button.on{background:var(--accent);color:var(--bg)}
+.srow.lr span:last-child{flex:1;text-align:left;color:var(--ink)}
+.tb{text-align:center;font-weight:700;letter-spacing:.03em}
+.tb{background:rgba(200,16,46,.10);background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--accent);border:0;border-left:5px solid var(--accent);border-radius:0;text-align:left;font-size:.78rem;padding:10px 12px;display:flex;align-items:center}
+.tb::before{content:"!";flex:none;display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:var(--accent);color:var(--bg);margin-right:10px;font-size:.75rem}
+body{padding-bottom:48px}
+.ticker{position:fixed;left:0;right:0;bottom:0;z-index:10;background:#c8102e;color:#fff;overflow:hidden;white-space:nowrap;padding:9px 0 calc(9px + env(safe-area-inset-bottom,0px));font-family:system-ui,sans-serif;font-size:.82rem;font-weight:600;letter-spacing:.05em;border-top:3px solid #8f0b21}
+.track{display:inline-flex;will-change:transform;animation:tick 120s linear infinite}
+.cyc{display:inline-flex;align-items:center;flex:none}
+.lbl{font-weight:800;margin:0 28px 0 14px}
+.it::after{content:"\2022";margin:0 28px;opacity:.7}
+@keyframes tick{to{transform:translateX(-50%)}}
+footer{text-align:center;color:var(--mute);font-family:system-ui,sans-serif;font-size:.8rem;padding-bottom:32px}
+</style>
+</head>
+<body>
+<header>
+  <h1>The League</h1>
+  <div class="sub">Last updated <span id="upd"></span></div>
+</header>
+<nav class="tabs"><button id="b-league" class="on" data-t="league">Offline League Rules</button><button id="b-cbs" data-t="cbs">CBS Rules</button></nav>
+<main>
+  <div id="tab-league">
+  <div id="rules"></div>
+  </div>
+  <div id="tab-cbs" hidden><div class="tb">ALL SETTINGS ARE DIRECTLY FROM CBS SITE</div><div id="cbsroot"></div></div>
+</main>
+<footer>Commissioner's word is final. Rules are updated here first.</footer>
+<div class="ticker" aria-label="Past league champions"><div class="track" id="track"></div></div>
+<script src="rules.js"></script>
+<script>
+var root=document.getElementById('rules'),latest='',n=0;
+var pr=document.createElement('section');
+var ph=document.createElement('h2');ph.textContent='League Rules (Not on CBS)';pr.appendChild(ph);
+SECTIONS.forEach(function(sec){
+  var dt=document.createElement('details');
+  var sm=document.createElement('summary');sm.textContent=sec.name;dt.appendChild(sm);
+  sec.rules.forEach(function(r){
+    n++;
+    var row=document.createElement('div');row.className='srow lr';
+    var x=document.createElement('span');x.textContent=r.t;
+    var y=document.createElement('span');y.textContent=r.d;
+    row.appendChild(x);row.appendChild(y);dt.appendChild(row);
+    if(r.date>latest)latest=r.date;
+  });
+  pr.appendChild(dt);
+});
+root.appendChild(pr);
+function renderGroups(title,data){
+  var sc=document.createElement('section');
+  var sh=document.createElement('h2');sh.textContent=title;sc.appendChild(sh);
+  data.forEach(function(g){
+    var dt=document.createElement('details');
+    var sm=document.createElement('summary');sm.textContent=g.name;dt.appendChild(sm);
+    g.items.forEach(function(it){
+      var row=document.createElement('div');row.className='srow';
+      var a=document.createElement('span');a.textContent=it[0];
+      var b=document.createElement('span');b.textContent=it[1];
+      row.appendChild(a);row.appendChild(b);dt.appendChild(row);
+    });
+    sc.appendChild(dt);
+  });
+  document.getElementById('cbsroot').appendChild(sc);
+}
+renderGroups('Scoring Settings',SCORING);
+renderGroups('Schedule & Playoff Settings',SCHEDULE);
+renderGroups('Transaction Settings',TRANSACTIONS);
+if(SCORING_DATE>latest)latest=SCORING_DATE;
+if(SCHEDULE_DATE>latest)latest=SCHEDULE_DATE;
+if(TRANSACTIONS_DATE>latest)latest=TRANSACTIONS_DATE;
+var pd=latest.split('-');document.getElementById('upd').textContent=pd[2]+'-'+pd[1]+'-'+pd[0];
+var tabs={league:'tab-league',cbs:'tab-cbs'};
+function show(t){
+  if(!tabs[t])t='league';
+  Object.keys(tabs).forEach(function(k){
+    document.getElementById(tabs[k]).hidden=(k!==t);
+    document.getElementById('b-'+k).classList.toggle('on',k===t);
+  });
+  try{history.replaceState(null,'','#'+t)}catch(e){}
+}
+document.querySelectorAll('.tabs button').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.t)})});
+show(location.hash.slice(1));
+(function(){
+  var tr=document.getElementById('track');
+  function cycle(){
+    var s=document.createElement('span');s.className='cyc';
+    var l=document.createElement('span');l.className='lbl';l.textContent='\uD83C\uDFC6 PAST CHAMPIONS';s.appendChild(l);
+    CHAMPIONS.forEach(function(c){var i=document.createElement('span');i.className='it';i.textContent=c[0]+': '+c[1];s.appendChild(i);});
+    return s;
+  }
+  for(var k=0;k<4;k++)tr.appendChild(cycle());
+  tr.style.animationDuration=Math.max(40,(tr.scrollWidth/2)/60)+'s';
+})();
+</script>
+</body>
+</html>
