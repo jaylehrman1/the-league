@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The League — Official Rules</title>
+<style>
+:root{--bg:#fff;--card:#fff;--ink:#1b1b1b;--mute:#6b6b6b;--accent:#c8102e;--gold:#c8102e;--line:#ecd9db;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#161212;--card:#201919;--ink:#f5eeee;--mute:#b3a3a3;--accent:#ff5a6e;--gold:#ff5a6e;--line:#3a2a2c}}
+:root[data-theme="dark"]{--bg:#161212;--card:#201919;--ink:#f5eeee;--mute:#b3a3a3;--accent:#ff5a6e;--gold:#ff5a6e;--line:#3a2a2c}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Georgia,'Times New Roman',serif;line-height:1.55}
+header{padding:24px 16px 14px;text-align:center;border-bottom:4px solid var(--gold)}
+h1{margin:0;font-size:1.8rem;letter-spacing:.04em;text-transform:uppercase;color:var(--accent)}
+.sub{color:var(--mute);margin-top:6px;font-family:system-ui,sans-serif;font-size:.9rem}
+main{max-width:720px;margin:0 auto;padding:14px 12px 32px}
+h2{font-family:system-ui,sans-serif;font-size:1rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin:4px 0 10px}
+.rule{display:flex;gap:10px;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:9px 12px;margin-bottom:7px}
+.num{flex:none;width:24px;height:24px;font-size:.8rem;border-radius:50%;background:var(--accent);color:var(--bg);display:flex;align-items:center;justify-content:center;font-family:system-ui,sans-serif;font-weight:700}
+.rule h3{margin:0 0 2px;font-size:.95rem}
+.rule p{margin:0;font-size:.88rem;line-height:1.4}
+.date{font-family:system-ui,sans-serif;font-size:.68rem;color:var(--mute);margin-top:3px}
+h2 small{font-weight:400;letter-spacing:0;text-transform:none;margin-left:6px}
+.tb{background:var(--accent);color:var(--bg);font-family:system-ui,sans-serif;font-size:.85rem;border-radius:8px;padding:8px 12px;margin-bottom:14px}
+section{margin-bottom:10px}
+footer{text-align:center;color:var(--mute);font-family:system-ui,sans-serif;font-size:.8rem;padding-bottom:32px}
+</style>
+</head>
+<body>
+<header>
+  <h1>The League</h1>
+  <div class="sub">Official off-platform rules · Last updated <span id="upd"></span></div>
+</header>
+<main>
+  <div class="tb"><strong>Universal tiebreaker:</strong> most Points For (PF) — used for division winners, the next 4 spots, and seeding.</div>
+  <div id="rules"></div>
+</main>
+<footer>Commissioner's word is final. Rules are updated here first.</footer>
+<script src="rules.js"></script>
+<script>
+var root=document.getElementById('rules'),latest='',n=0;
+SECTIONS.forEach(function(sec){
+  var se=document.createElement('section');
+  var h=document.createElement('h2');h.textContent=sec.name;se.appendChild(h);
+  sec.rules.forEach(function(r){
+    n++;
+    var el=document.createElement('div');el.className='rule';
+    var nm=document.createElement('div');nm.className='num';nm.textContent=n;
+    var b=document.createElement('div');
+    var t=document.createElement('h3');t.textContent=r.t;
+    var p=document.createElement('p');p.textContent=r.d;
+    var d=document.createElement('div');d.className='date';d.textContent='Added/updated '+r.date;
+    b.appendChild(t);b.appendChild(p);b.appendChild(d);
+    el.appendChild(nm);el.appendChild(b);se.appendChild(el);
+    if(r.date>latest)latest=r.date;
+  });
+  root.appendChild(se);
+});
+document.getElementById('upd').textContent=latest;
+</script>
+</body>
+</html>
