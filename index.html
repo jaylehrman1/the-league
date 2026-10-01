@@ -103,7 +103,7 @@ renderGroups('Transaction Settings',TRANSACTIONS);
 if(SCORING_DATE>latest)latest=SCORING_DATE;
 if(SCHEDULE_DATE>latest)latest=SCHEDULE_DATE;
 if(TRANSACTIONS_DATE>latest)latest=TRANSACTIONS_DATE;
-var pd=latest.split('-');document.getElementById('upd').textContent=pd[2]+'-'+pd[1]+'-'+pd[0];
+var pd=latest.split('-');document.getElementById('upd').textContent=pd[1]+'-'+pd[2]+'-'+pd[0];
 var tabs={league:'tab-league',cbs:'tab-cbs'};
 function show(t){
   if(!tabs[t])t='league';
