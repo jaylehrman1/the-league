@@ -32,7 +32,7 @@ summary{cursor:pointer;padding:9px 12px;font-family:system-ui,sans-serif;font-we
 .srow span:last-child{text-align:right;color:var(--mute)}
 [hidden]{display:none!important}
 .tabs{display:flex;gap:6px;max-width:720px;margin:0 auto;padding:12px 12px 0}
-.tabs button{flex:1;font-family:system-ui,sans-serif;font-size:.88rem;font-weight:600;padding:10px 8px;border:1px solid var(--accent);background:var(--card);color:var(--accent);border-radius:8px;cursor:pointer}
+.tabs button{flex:1;font-family:system-ui,sans-serif;font-size:.8rem;line-height:1.2;font-weight:600;padding:10px 6px;border:1px solid var(--accent);background:var(--card);color:var(--accent);border-radius:8px;cursor:pointer}
 .tabs button.on{background:var(--accent);color:var(--bg)}
 .srow.lr span:last-child{flex:1;text-align:left;color:var(--ink)}
 .tb{text-align:center;font-weight:700;letter-spacing:.03em}
@@ -45,6 +45,8 @@ body{padding-bottom:48px}
 .lbl{font-weight:800;margin:0 28px 0 14px}
 .it::after{content:"\2022";margin:0 28px;opacity:.7}
 @keyframes tick{to{transform:translateX(-50%)}}
+.draftimg{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:8px}
+.cap{font-family:system-ui,sans-serif;font-size:.75rem;color:var(--mute);margin-top:8px}
 footer{text-align:center;color:var(--mute);font-family:system-ui,sans-serif;font-size:.8rem;padding-bottom:32px}
 </style>
 </head>
@@ -53,12 +55,13 @@ footer{text-align:center;color:var(--mute);font-family:system-ui,sans-serif;font
   <h1>The League</h1>
   <div class="sub">Last updated <span id="upd"></span></div>
 </header>
-<nav class="tabs"><button id="b-league" class="on" data-t="league">Offline League Rules</button><button id="b-cbs" data-t="cbs">CBS Rules</button></nav>
+<nav class="tabs"><button id="b-league" class="on" data-t="league">Offline League Rules</button><button id="b-cbs" data-t="cbs">CBS Rules</button><button id="b-draft" data-t="draft">2026 Draft</button></nav>
 <main>
   <div id="tab-league">
   <div id="rules"></div>
   </div>
   <div id="tab-cbs" hidden><div class="tb">ALL SETTINGS ARE DIRECTLY FROM CBS SITE</div><div id="cbsroot"></div></div>
+  <div id="tab-draft" hidden><div id="draftroot"></div></div>
 </main>
 <footer>Commissioner's word is final. Rules are updated here first.</footer>
 <div class="ticker" aria-label="Past league champions"><div class="track" id="track"></div></div>
@@ -103,8 +106,18 @@ renderGroups('Transaction Settings',TRANSACTIONS);
 if(SCORING_DATE>latest)latest=SCORING_DATE;
 if(SCHEDULE_DATE>latest)latest=SCHEDULE_DATE;
 if(TRANSACTIONS_DATE>latest)latest=TRANSACTIONS_DATE;
+if(DRAFT_DATE>latest)latest=DRAFT_DATE;
 var pd=latest.split('-');document.getElementById('upd').textContent=pd[1]+'-'+pd[2]+'-'+pd[0];
-var tabs={league:'tab-league',cbs:'tab-cbs'};
+(function(){
+  var sec=document.createElement('section');
+  var t=document.createElement('h2');t.textContent=DRAFT_TITLE;sec.appendChild(t);
+  var a=document.createElement('a');a.href=DRAFT_IMAGE;a.target='_blank';a.rel='noopener';
+  var im=document.createElement('img');im.className='draftimg';im.src=DRAFT_IMAGE;im.alt=DRAFT_TITLE;
+  a.appendChild(im);sec.appendChild(a);
+  var c=document.createElement('div');c.className='cap';c.textContent='Tap the picture to open it full size and zoom in.';sec.appendChild(c);
+  document.getElementById('draftroot').appendChild(sec);
+})();
+var tabs={league:'tab-league',cbs:'tab-cbs',draft:'tab-draft'};
 function show(t){
   if(!tabs[t])t='league';
   Object.keys(tabs).forEach(function(k){

@@ -22,6 +22,9 @@ var SECTIONS = [
     {t:"Trade Processing", d:"All trades are processed by the commissioner as soon as he is available to push the trade through. Trades can be processed at any time, as long as no player involved in the trade has already played that week.", date:"2026-10-01"},
     {t:"FAAB in Trades", d:"Trades can include FAAB money. Any FAAB agreed to in a trade must be reported to the commissioner, who updates it manually.", date:"2026-10-01"}
   ]},
+  {name:"Keepers", rules:[
+    {t:"Keeping a Player", d:"Each team may keep 1 player from the previous season. Players drafted in rounds 1–4 cannot be kept the following year. A kept player costs you the draft pick in the round that is half of the round he was drafted in last year. If he was drafted in an odd round, round up to the next even round first, then halve it. Examples: drafted in round 8, he is your round 4 pick; drafted in round 9, round up to 10, he is your round 5 pick. A player who was not drafted last year is kept as your round 8 pick.", date:"2026-10-01"}
+  ]},
   {name:"Punishment", rules:[
     {t:"Losers Bracket Punishment", d:"The loser of the losers bracket must caddy for that year's league winner.", date:"2026-10-01"}
   ]}
@@ -134,3 +137,12 @@ var CHAMPIONS = [
   ["2019","FERDMAN"],["2020","STOTTER"],["2021","LEVIN (Z)"],["2022","STOTTER"],
   ["2023","REINGOLD"],["2024","PRICE"],["2025","REINGOLD"]
 ];
+
+// ============================================================
+//  DRAFT BOARD TAB
+//  - To change the picture: upload a new photo to the repo and put its
+//    file name below (keep it simple, like draft-board-2027.jpg).
+// ============================================================
+var DRAFT_TITLE = "2026 Draft Board";
+var DRAFT_IMAGE = "draft-board.jpg";
+var DRAFT_DATE = "2026-10-01";
