@@ -54,10 +54,23 @@ body{padding-bottom:48px}
 .cd .u b{display:block;font-size:1.3rem;line-height:1.1;font-variant-numeric:tabular-nums}
 .cd .u span{font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
 .cd .done{background:rgba(0,0,0,.22);border-radius:6px;padding:8px 14px;font-weight:700;font-size:.85rem}
+.nfl{background:#1b1b1b;color:#fff;overflow:hidden;white-space:nowrap;padding:7px 0;font-family:system-ui,sans-serif;font-size:.78rem;border-bottom:1px solid #000}
+.ntrack{display:inline-flex;will-change:transform;animation:tick 60s linear infinite}
+.ncyc{display:inline-flex;align-items:center;flex:none}
+.nlbl{font-weight:800;letter-spacing:.05em;margin:0 22px 0 14px}
+.ng{display:inline-flex;align-items:center;gap:5px}
+.ng::after{content:"\2022";margin:0 20px;opacity:.5}
+.nt{font-weight:700;letter-spacing:.03em}
+.ns{font-variant-numeric:tabular-nums;font-weight:700}
+.nt.dim,.ns.dim{opacity:.55}
+.nat{opacity:.55;margin:0 1px}
+.nst{opacity:.8;margin-left:3px}
+.nlive{background:#1fa75a;color:#fff;font-size:.62rem;font-weight:800;letter-spacing:.06em;border-radius:3px;padding:1px 5px;margin-right:3px}
 footer{text-align:center;color:var(--mute);font-family:system-ui,sans-serif;font-size:.8rem;padding-bottom:32px}
 </style>
 </head>
 <body>
+<div class="nfl" id="nfl" hidden aria-label="NFL scores"><div class="ntrack" id="ntrack"></div></div>
 <header>
   <h1>The League</h1>
   <div class="sub">Last updated <span id="upd"></span></div>
@@ -174,6 +187,73 @@ show(location.hash.slice(1));
     nums[0].textContent=days;nums[1].textContent=pad(hrs);nums[2].textContent=pad(mins);nums[3].textContent=pad(s);
   }
   wrap.hidden=false;tick();timer=setInterval(tick,1000);
+})();
+(function(){
+  if(typeof SHOW_NFL_SCORES==='undefined'||!SHOW_NFL_SCORES||typeof NFL_SCORES_URL==='undefined')return;
+  var bar=document.getElementById('nfl'),track=document.getElementById('ntrack');
+  var sig='',shown=false;
+  function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!==undefined)e.textContent=x;return e}
+  function when(d){var t=new Date(d);return isNaN(t)?'':t.toLocaleString(undefined,{weekday:'short',hour:'numeric',minute:'2-digit'})}
+  var RANK={in:0,pre:1,post:2};
+  function parse(j){
+    var out=[];
+    ((j&&j.events)||[]).forEach(function(ev){
+      var c=ev.competitions&&ev.competitions[0];if(!c||!c.competitors)return;
+      var home,away;
+      c.competitors.forEach(function(x){if(x.homeAway==='home')home=x;else if(x.homeAway==='away')away=x});
+      if(!home||!away||!home.team||!away.team)return;
+      var st=(ev.status&&ev.status.type)||{};
+      out.push({state:st.state||'pre',detail:st.shortDetail||'',date:ev.date,
+        away:{a:away.team.abbreviation,s:away.score},home:{a:home.team.abbreviation,s:home.score}});
+    });
+    out.sort(function(a,b){return (RANK[a.state]-RANK[b.state])||(new Date(a.date)-new Date(b.date))});
+    return out;
+  }
+  function game(g){
+    var w=el('span','ng');
+    var pre=g.state==='pre',fin=g.state==='post';
+    var as=parseInt(g.away.s,10),hs=parseInt(g.home.s,10);
+    if(g.state==='in')w.appendChild(el('span','nlive','LIVE'));
+    w.appendChild(el('span','nt'+(fin&&as<hs?' dim':''),g.away.a));
+    if(!pre)w.appendChild(el('span','ns'+(fin&&as<hs?' dim':''),g.away.s));
+    w.appendChild(el('span','nat','@'));
+    w.appendChild(el('span','nt'+(fin&&hs<as?' dim':''),g.home.a));
+    if(!pre)w.appendChild(el('span','ns'+(fin&&hs<as?' dim':''),g.home.s));
+    w.appendChild(el('span','nst',pre?when(g.date):g.detail));
+    return w;
+  }
+  function render(games,label){
+    var s=JSON.stringify([games,label]);if(s===sig)return;sig=s;
+    track.textContent='';
+    function cycle(){var c=el('span','ncyc');c.appendChild(el('span','nlbl',label));games.forEach(function(g){c.appendChild(game(g))});return c}
+    var first=cycle();track.appendChild(first);bar.hidden=false;
+    var w=first.offsetWidth||300;
+    var n=Math.max(4,2*Math.ceil((window.innerWidth||400)/w));
+    for(var i=1;i<n;i++)track.appendChild(first.cloneNode(true));
+    track.style.animationDuration=Math.max(20,(w*n/2)/55)+'s';
+    shown=true;
+  }
+  var DEMO=[
+    {state:'in',detail:'9:41 - 3rd',date:'',away:{a:'BUF',s:'21'},home:{a:'KC',s:'17'}},
+    {state:'pre',detail:'',date:new Date(Date.now()+86400000).toISOString(),away:{a:'SF',s:'0'},home:{a:'LAR',s:'0'}},
+    {state:'pre',detail:'',date:new Date(Date.now()+90000000).toISOString(),away:{a:'DAL',s:'0'},home:{a:'PHI',s:'0'}},
+    {state:'post',detail:'Final',date:'',away:{a:'DET',s:'31'},home:{a:'GB',s:'27'}},
+    {state:'post',detail:'Final',date:'',away:{a:'PIT',s:'17'},home:{a:'CLE',s:'20'}}
+  ];
+  function fail(){
+    if(shown)return;
+    if(typeof NFL_DEMO!=='undefined'&&NFL_DEMO)render(DEMO,'\uD83C\uDFC8 NFL SCORES (SAMPLE DATA)');
+    else bar.hidden=true;
+  }
+  function load(){
+    if(document.hidden&&shown)return;
+    fetch(NFL_SCORES_URL,{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(j){
+      var g=parse(j);if(!g.length){fail();return}
+      render(g,'\uD83C\uDFC8 NFL SCORES');
+    }).catch(fail);
+  }
+  load();
+  setInterval(load,Math.max(20,(typeof NFL_REFRESH_SECONDS!=='undefined'?NFL_REFRESH_SECONDS:60))*1000);
 })();
 </script>
 </body>

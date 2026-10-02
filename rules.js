@@ -156,3 +156,13 @@ var DRAFT_DATE = "2026-10-01";
 // ============================================================
 var TRADE_DEADLINE = "2026-11-12T23:59:00-05:00";
 var TRADE_DEADLINE_TEXT = "Thu, Nov 12 \u00b7 11:59 PM ET";
+
+// ============================================================
+//  NFL SCORES STRIP (scrolls across the very top of the site)
+//  - Set SHOW_NFL_SCORES to false to turn it off.
+//  - Scores come from ESPN's public scoreboard feed (unofficial).
+//    If it can't be reached, the strip hides itself.
+// ============================================================
+var SHOW_NFL_SCORES = true;
+var NFL_SCORES_URL = "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard";
+var NFL_REFRESH_SECONDS = 60;
