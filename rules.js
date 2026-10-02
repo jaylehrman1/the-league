@@ -23,7 +23,7 @@ var SECTIONS = [
     {t:"FAAB in Trades", d:"Trades can include FAAB money. Any FAAB agreed to in a trade must be reported to the commissioner, who updates it manually.", date:"2026-10-01"}
   ]},
   {name:"Keepers", rules:[
-    {t:"Keeping a Player", d:"Each team may keep 1 player from the previous season. Players drafted in rounds 1–4 cannot be kept the following year. A kept player costs you the draft pick in the round that is half of the round he was drafted in last year. If he was drafted in an odd round, round up to the next even round first, then halve it. Examples: drafted in round 8, he is your round 4 pick; drafted in round 9, round up to 10, he is your round 5 pick. A player who was not drafted last year is kept as your round 8 pick.", date:"2026-10-01"}
+    {t:"Keeping a Player", d:"Each team may keep 1 player from the previous season. You do not have to be the team that drafted him, but the rules below still apply based on when (or whether) he was drafted last year. The player must be on your roster by the end of your season. Players drafted in rounds 1–4 cannot be kept the following year. A kept player costs you the draft pick in the round that is half of the round he was drafted in last year. If he was drafted in an odd round, round up to the next even round first, then halve it. Examples: drafted in round 8, he is your round 4 pick; drafted in round 9, round up to 10, he is your round 5 pick. A player who was not drafted last year is kept as your round 8 pick.", date:"2026-10-01"}
   ]},
   {name:"Punishment", rules:[
     {t:"Losers Bracket Punishment", d:"The loser of the losers bracket must caddy for that year's league winner.", date:"2026-10-01"}
