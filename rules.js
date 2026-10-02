@@ -146,3 +146,13 @@ var CHAMPIONS = [
 var DRAFT_TITLE = "2026 Draft Board";
 var DRAFT_IMAGE = "draft-board.jpg";
 var DRAFT_DATE = "2026-10-01";
+
+// ============================================================
+//  TRADE DEADLINE COUNTDOWN (shows under the title on every tab)
+//  - TRADE_DEADLINE is the exact moment, written as YYYY-MM-DDTHH:MM:SS-05:00
+//    The -05:00 is Eastern Standard Time (early Nov to mid Mar).
+//    Use -04:00 for Eastern Daylight Time (mid Mar to early Nov).
+//  - If the deadline changes, also update the CBS "Trade Deadline" line.
+// ============================================================
+var TRADE_DEADLINE = "2026-11-12T23:59:00-05:00";
+var TRADE_DEADLINE_TEXT = "Thu, Nov 12 \u00b7 11:59 PM ET";
