@@ -4,6 +4,7 @@
 //  - To add a rule: copy a whole {t:"...", d:"...", date:"..."} line
 //    and put a comma after the one before it.
 //  - To add a section: copy a whole {name:"...", rules:[ ... ]} block.
+//  - To add a sub-heading inside a section: add a line like {h:"Eligibility"},
 //  - Update "date" to the day you changed the rule (YYYY-MM-DD).
 // ============================================================
 var SECTIONS = [
@@ -16,14 +17,24 @@ var SECTIONS = [
     {t:"Seeds Are Set by Points For", d:"Once all 8 teams are set, seeds 1–8 are determined by most PF.", date:"2026-10-01"}
   ]},
   {name:"Playoff Matchups", rules:[
-    {t:"Top Seeds Pick Their Opponent", d:"The 1 seed picks who to play from seeds 5–8. Then the 2 seed picks from the remaining teams in 5–8. Same for the 3 seed, then the 4 seed.", date:"2026-10-01"}
+    {h:"Round 1"},
+    {t:"Top Seeds Pick Their Opponent", d:"The 1 seed picks who to play from seeds 5–8. Then the 2 seed picks from the remaining teams in 5–8. Same for the 3 seed, then the 4 seed.", date:"2026-10-01"},
+    {h:"Round 2 (Semifinals)"},
+    {t:"Matchups Set by Points For", d:"In the semifinals, matchups are set by PF among the four remaining teams. The team with the most PF plays the team with the least PF, and the team with the second most PF plays the team with the third most PF.", date:"2026-10-12"}
   ]},
   {name:"Trades", rules:[
     {t:"Trade Processing", d:"All trades are processed by the commissioner as soon as he is available to push the trade through. Trades can be processed at any time, as long as no player involved in the trade has already played that week.", date:"2026-10-01"},
     {t:"FAAB in Trades", d:"Trades can include FAAB money. Any FAAB agreed to in a trade must be reported to the commissioner, who updates it manually.", date:"2026-10-01"}
   ]},
   {name:"Keepers", rules:[
-    {t:"Keeping a Player", d:"Each team may keep 1 player from the previous season. You do not have to be the team that drafted him, but the rules below still apply based on when (or whether) he was drafted last year. The player must be on your roster by the end of your season. Players drafted in rounds 1–4 cannot be kept the following year. A kept player costs you the draft pick in the round that is half of the round he was drafted in last year. If he was drafted in an odd round, round up to the next even round first, then halve it. Examples: drafted in round 8, he is your round 4 pick; drafted in round 9, round up to 10, he is your round 5 pick. A player who was not drafted last year is kept as your round 8 pick.", date:"2026-10-01"}
+    {h:"Eligibility"},
+    {t:"Keeping a Player", d:"Each team may keep 1 player from the previous season. You do not have to be the team that drafted him, but the rules below still apply based on when (or whether) he was drafted last year. The player must be on your roster by the end of your season.", date:"2026-10-12"},
+    {t:"Rounds 1–4", d:"Players drafted in rounds 1–4 cannot be kept the following year.", date:"2026-10-12"},
+    {t:"No Back-to-Back Keepers", d:"A player cannot be kept two years in a row, regardless of who owns him at the end of the year.", date:"2026-10-12"},
+    {h:"Cost"},
+    {t:"Keeper Round", d:"A kept player costs you the draft pick in the round that is half of the round he was drafted in last year. If he was drafted in an odd round, round up to the next even round first, then halve it.", date:"2026-10-12"},
+    {t:"Examples", d:"Drafted in round 8: he is your round 4 pick. Drafted in round 9: round up to 10, he is your round 5 pick.", date:"2026-10-12"},
+    {t:"Undrafted Players", d:"A player who was not drafted last year is kept as your round 8 pick.", date:"2026-10-12"}
   ]},
   {name:"Punishment", rules:[
     {t:"Losers Bracket Punishment", d:"The loser of the losers bracket must caddy for that year's league winner.", date:"2026-10-01"}
