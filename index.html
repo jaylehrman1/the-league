@@ -88,7 +88,7 @@ footer{text-align:center;color:var(--mute);font-family:system-ui,sans-serif;font
 </main>
 <footer>Commissioner's word is final. Rules are updated here first.<br><a class="hist" href="history.html">Revision History &rarr;</a></footer>
 <div class="ticker" aria-label="Past league champions"><div class="track" id="track"></div></div>
-<script src="rules.js"></script>
+<script>document.write('<script src="rules.js?v='+Date.now()+'"><\/script>')</script>
 <script>
 var root=document.getElementById('rules'),latest='',n=0;
 var pr=document.createElement('section');

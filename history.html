@@ -29,7 +29,7 @@ h2{font-family:system-ui,sans-serif;font-size:.85rem;letter-spacing:.08em;text-t
   <div id="list"></div>
   <a class="back bottom" href="./">&larr; Back to Rules</a>
 </main>
-<script src="rules.js"></script>
+<script>document.write('<script src="rules.js?v='+Date.now()+'"><\/script>')</script>
 <script>
 (function(){
   var list=document.getElementById('list');
