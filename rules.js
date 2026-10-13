@@ -177,3 +177,27 @@ var TRADE_DEADLINE_TEXT = "Thu, Nov 12 \u00b7 11:59 PM ET";
 var SHOW_NFL_SCORES = true;
 var NFL_SCORES_URL = "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard";
 var NFL_REFRESH_SECONDS = 60;
+
+// ============================================================
+//  REVISION HISTORY (shown on the Revision History page)
+//  - Add a new line at the TOP of the list each time you change something.
+//  - Each line is {date:"YYYY-MM-DD", d:"what changed"}. Keep the commas and quotes.
+//  - The newest date also becomes the "Last updated" date on the main page.
+// ============================================================
+var REVISIONS = [
+  {date:"2026-10-12", d:"Playoff Matchups: added the Round 2 (Semifinals) rule. Matchups are set by PF: the team with the most PF plays the team with the least PF, and the team with the second most PF plays the team with the third most PF. The group is now split into Round 1 and Round 2 sections."},
+  {date:"2026-10-12", d:"Keepers: added that a player cannot be kept two years in a row, regardless of who owns him at the end of the year."},
+  {date:"2026-10-12", d:"Keepers: reorganized into Eligibility and Cost sections. No rules were changed by the reorganization."},
+  {date:"2026-10-01", d:"Keepers: clarified that you do not have to be the team that drafted the player, but the rules still apply based on when (or whether) he was drafted last year. The player must be on your roster by the end of your season."},
+  {date:"2026-10-01", d:"Keepers: players drafted in rounds 1\u20134 cannot be kept the following year."},
+  {date:"2026-10-01", d:"Added the Keepers rule: 1 player per team, costing the draft pick in half the round he was drafted in (odd rounds round up to the next even round first). Undrafted players are kept as a round 8 pick."},
+  {date:"2026-10-01", d:"Added the 2026 Draft tab with the draft board photo."},
+  {date:"2026-10-01", d:"Added the Past Champions ticker (2007\u20132025)."},
+  {date:"2026-10-01", d:"Added the Punishment rule: the loser of the losers bracket caddies for that year's league winner."},
+  {date:"2026-10-01", d:"Trades: added that trades can include FAAB money, which must be reported to the commissioner to update manually."},
+  {date:"2026-10-01", d:"Trades: added that all trades are processed by the commissioner as soon as he is available, as long as no player in the trade has already played that week."},
+  {date:"2026-10-01", d:"Added the CBS Transaction Settings (lineups, add/drops and waivers, trades)."},
+  {date:"2026-10-01", d:"Added the CBS Schedule & Playoff Settings (schedule and tiebreakers)."},
+  {date:"2026-10-01", d:"Added the CBS Scoring Settings (scoring policies, passing, rushing & receiving, kicking, team defense / special teams)."},
+  {date:"2026-10-01", d:"Site launched with the original playoff rules: 8-team playoff, division winners, the next 4 spots, seeding by PF, and the Round 1 opponent picks."}
+];
